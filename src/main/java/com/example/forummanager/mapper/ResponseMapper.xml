@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.forummanager.mapper.ResponseMapper">
+    <resultMap id="responseMap" type="com.example.forummanager.pojo.Response">
+        <result column="u_id" property="uid"/>
+        <result column="re_id" property="reid"/>
+        <result column="wr_time" property="wrTime"/>
+        <result column="wr_content" property="wrContent"/>
+<!--        用户信息-->
+        <association property="userInfo"
+                     resultMap="com.example.forummanager.mapper.UserInfoMapper.UserInfoMap"/>
+    </resultMap>
+
+    <insert id="addReply">
+        insert into response (com_id,u_id,wr_content,wr_time)
+        values (#{com_id},#{u_id},#{wr_content},#{wr_time})
+    </insert>
+</mapper>

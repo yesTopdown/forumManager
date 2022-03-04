@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.forummanager.mapper.FollowMapper">
+    <resultMap id="followMap" type="com.example.forummanager.pojo.Follow">
+        <result column="followed_id" property="followedId"/>
+        <result column="follow_id" property="followId"/>
+    </resultMap>
+    <select id="queryAllFollows" resultMap="com.example.forummanager.mapper.UserInfoMapper.UserInfoMap">
+        SELECT `user_info`.* FROM `user_info`
+           right JOIN follow ON `user_info`.`u_id`=follow.`follow_id`
+        where follow.`followed_id`=#{u_id}
+    </select>
+    <select id="queryWasFolloweds" resultMap="com.example.forummanager.mapper.UserInfoMapper.UserInfoMap">
+        SELECT `user_info`.* FROM `user_info`
+             right JOIN follow ON `user_info`.`u_id`=follow.`followed_id`
+        where follow.`follow_id`=#{u_id}
+    </select>
+    <insert id="addFollows">
+        insert into follow(follow_id,followed_id) values(#{follow},#{followed})
+    </insert>
+    <select id="queryAllFollowInfo" resultMap="com.example.forummanager.mapper.PostMapper.postMap">
+        select post.*,comment.*,user_info.*
+        from post
+        left join
+        comment on post.post_id=comment.post_id
+        left join user_info on user_info.u_id=post.u_id
+        left join follow on user_info.u_id=follow_id
+        where followed_id=#{uid}
+    </select>
+</mapper>

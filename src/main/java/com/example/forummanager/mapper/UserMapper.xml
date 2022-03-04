@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.forummanager.mapper.UserMapper">
+    <resultMap id="userMap" type="com.example.forummanager.pojo.User">
+        <result column="u_id" property="uid"/>
+        <result column="password" property="password"/>
+        <result column="username" property="username"/>
+<!--        一个人发多个帖子-->
+        <collection property="posts" resultMap="com.example.forummanager.mapper.PostMapper.postMap"/>
+    </resultMap>
+    <select id="queryAllPosts" resultMap="userMap">
+        SELECT * FROM p_user
+            LEFT JOIN post ON p_user.u_id= post.u_id
+        where p_user.u_id=#{u_id}
+    </select>
+
+    <insert id="addUser">
+        insert into
+           select * from p_user
+            join  user_info p_user.u_id= post.u_id
+            (p_user.username,p_user.pasword,user_info.username)
+        values (#{username},#{password},#{username})
+    </insert>
+</mapper>

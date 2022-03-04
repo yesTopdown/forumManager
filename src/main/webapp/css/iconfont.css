@@ -1,0 +1,77 @@
+@font-face {
+  font-family: "iconfont";
+  src: url('/iconfont/sousuo.ttf?t=1629277029137') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-sousuo:before {
+  content: "\e854";
+  color: #8590a6;
+}
+
+@font-face {
+  font-family: "iconfont"; 
+  src: url('../iconfont/view.ttf?t=1629458228736') format('truetype');
+}
+
+.icon-view:before {
+  content: "\e671";
+  color: #8590a6;
+}
+
+@font-face {
+  font-family: "iconfont"; 
+  src:url('../iconfont/like.ttf?t=1629457436909') format('truetype');
+}
+
+
+.icon-Like:before {
+  content: "\e616";
+  color: #8590a6;
+}
+
+@font-face {
+  font-family: "iconfont";
+  src:url('../iconfont/xiaoxi.ttf?t=1642307461596') format('truetype');
+}
+
+.icon-xiaoxi:before {
+  content: "\e607";
+}
+.icon-xiaoxi{
+  font-size: 24px;
+}
+
+@font-face {
+  font-family: "iconfont";
+  src:url('../iconfont/haoyou.ttf?t=1642390179284') format('truetype');
+}
+
+.icon-haoyou:before {
+  content: "\e6ea";
+}
+.icon-haoyou{
+  font-size: 24px;
+}
+
+@font-face {
+  font-family: "iconfont";
+  src:url('../iconfont/pinglun.ttf?t=1642582980209') format('truetype');
+}
+
+.icon-pinglun:before {
+  content: "\e629";
+}
+.icon-pinglun{
+  font-size: 14px;
+  color: #8590a6;
+}
+
+

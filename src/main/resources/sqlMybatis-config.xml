@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties resource="jdbc.properties"/>
+   <typeAliases> <!-- 别名-->
+<!--        <typeAlias type="com.example.forummanager.pojo.Post" alias="post"/>-->
+<!--        <typeAlias type="com.example.forummanager.pojo.Response" alias="response"/>-->
+<!--       <typeAlias type="com.example.forummanager.pojo.Follow" alias="follow"/>-->
+<!--       <typeAlias type="com.example.forummanager.pojo.Grade" alias="grade"/>-->
+<!--       <typeAlias type="com.example.forummanager.pojo.Manager" alias="manager"/>-->
+<!--       <typeAlias type="com.example.forummanager.pojo.User" alias="user"/>-->
+<!--       <typeAlias type="com.example.forummanager.pojo.UserInfo" alias="userInfo"/>-->
+       <package name="com/example/forummanager/pojo"/>
+    </typeAliases>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <package name="com.example.forummanager.mapper"/>
+    </mappers>
+</configuration>

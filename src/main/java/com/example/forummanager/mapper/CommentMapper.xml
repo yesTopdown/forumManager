@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.forummanager.mapper.CommentMapper">
+    <resultMap id="CommentMap" type="com.example.forummanager.pojo.Comment">
+        <result column="com_id" property="comId"/>
+        <result column="post_id" property="post_id"/>
+        <result column="com_content" property="com_content"/>
+        <result column="com_time" property="com_time"/>
+<!--        评论的作者-->
+        <association property="userInfo" resultMap="com.example.forummanager.mapper.UserInfoMapper.UserInfoMap"/>
+<!--        评论的帖子-->
+        <association property="post" resultMap="com.example.forummanager.mapper.PostMapper.postMap"/>
+<!--        多条回复-->
+        <collection property="commentRes"
+                    resultMap="com.example.forummanager.mapper.ResponseMapper.responseMap"/>
+
+    </resultMap>
+    <insert id="addComments">
+        insert into comment(u_id,post_id,com_content,com_time)
+        values(#{u_id},#{post_id},#{com_content},#{com_time})
+    </insert>
+    <select id="queryReplies" resultMap="com.example.forummanager.mapper.ResponseMapper.responseMap">
+        SELECT response.*,user_info.* FROM response
+         LEFT JOIN user_info ON user_info.`u_id`=response.`u_id`
+         LEFT JOIN `comment`
+         ON response.`com_id`=comment.`com_id`
+        WHERE comment.`com_id`=#{com_id}
+    </select>
+    <select id="queryCommentByp" resultMap="CommentMap">
+        SELECT `comment`.*,user_info.*
+        FROM `comment` LEFT JOIN user_info ON comment.`u_id`=user_info.`u_id`
+        WHERE comment.`post_id`=#{post_id}
+    </select>
+    <select id="queryCommByU" resultMap="CommentMap">
+        select user_info.u_id,user_info.username,user_info.avatar,
+               post.*,comment.com_content,comment.com_time
+            from user_info right join comment
+                on user_info.u_id=comment.u_id
+            left join post on post.post_id=comment.post_id
+        where comment.u_id=#{uid}
+    </select>
+</mapper>

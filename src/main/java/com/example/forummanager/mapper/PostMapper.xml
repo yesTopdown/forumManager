@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.forummanager.mapper.PostMapper">
+    <resultMap id="postMap" type="com.example.forummanager.pojo.Post">
+        <result column="post_id" property="postId"/>
+        <result column="title" property="title"/>
+        <result column="post_time" property="postTime"/>
+        <result column="content" property="content"/>
+        <result column="likes" property="likes"/>
+        <result column="views" property="views"/>
+        <!--        查询用户-->
+        <association property="userInfo"
+                     resultMap="com.example.forummanager.mapper.UserInfoMapper.UserInfoMap"/>
+
+<!--        一对多 一个帖子对多条评论和回复-->
+        <collection property="comments" resultMap="com.example.forummanager.mapper.CommentMapper.CommentMap"/>
+    </resultMap>
+    <insert id="OutPost">
+        insert into post (u_id,post_time,title,content)
+        values (#{uid},#{postTime},#{title},#{content})
+    </insert>
+
+    <update id="alterLikes">
+        update post set likes=#{likes} where post_id=#{postId}
+    </update>
+    <update id="alterViews">
+        update post set views=#{views} where post_id=#{postId}
+    </update>
+    <select id="queryPostAndUser" resultMap="postMap">
+        SELECT user_info.*,post.*
+        FROM post LEFT JOIN user_info ON post.`u_id`=user_info.`u_id`
+        WHERE post.`post_id`=#{post_id}
+    </select>
+    <select id="queryAllPost" resultMap="postMap">
+        select post.* from post
+        <if test="uid!=null">
+            where u_id=#{uid}
+        </if>
+    </select>
+    <delete id="deletePost" >
+        delete from post where post_id=#{post_id}
+    </delete>
+
+</mapper>
